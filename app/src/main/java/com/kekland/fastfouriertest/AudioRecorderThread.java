@@ -62,17 +62,6 @@ public class AudioRecorderThread extends Thread {
            while(!stopped) {
                Log.i("AudioRecorder", "Writing data to buffer");
                N = recorder.read(buffer, 0, buffer.length);
-               //track.write(buffer, 0, buffer.length);
-
-               short maxAmplitude = -1;
-
-               for(short sample : buffer) {
-                   if(sample > maxAmplitude) {
-                       maxAmplitude = sample;
-                   }
-               }
-
-               Log.d("AudioRecorder", "Max Amplitude: " + Short.toString(maxAmplitude));
                callback.onDataReceive(normalizePCMBuffer(buffer));
            }
        }
